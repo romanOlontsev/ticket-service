@@ -6,33 +6,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "Plane")
+@Table(name = "User")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Plane {
+public class User {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
 
-    private Integer places;
+    private String lastname;
 
-    private LocalDate depart;
-
-    private Duration duration;
-
-    @Column(name = "\"FROM\"")
-    private String from;
-
-    private String to;
+    private String passport;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ticket> tickets;
