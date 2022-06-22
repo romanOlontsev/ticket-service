@@ -24,7 +24,7 @@ public class Ticket {
     @JoinColumn(name = "plane_id")
     private Plane plane;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

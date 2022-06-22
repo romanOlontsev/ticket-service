@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "ticket-service.config.version",
+      "type": "java.lang.String",
+      "description": "Description for ticket-service.config.version."
+    }
+  ] }

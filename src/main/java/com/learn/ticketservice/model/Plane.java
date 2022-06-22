@@ -1,13 +1,14 @@
 package com.learn.ticketservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Plane {
 
     private Integer places;
 
-    private LocalDate depart;
+    private LocalDateTime depart;
 
     private Duration duration;
 
@@ -35,7 +36,18 @@ public class Plane {
     private String to;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Ticket> tickets;
 
     private boolean isDeleted;
+
+    public void associate(List<Ticket> tickets) {
+        if (this.tickets == null) {
+            this.tickets = new ArrayList<>();
+        }
+        this.tickets.addAll(tickets);
+
+        tickets.forEach(it -> it.setPlane(this));
+    }
 }
