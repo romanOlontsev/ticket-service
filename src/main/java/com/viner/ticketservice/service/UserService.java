@@ -47,16 +47,26 @@ public class UserService {
     @Transactional
     public UserDto updateUser(Long userId, AddOrUpdateUserDto user) {
         User foundUser = getUserEntity(userId);
-        foundUser.setName(user.getName());
-        foundUser.setLastName(user.getLastName());
-        foundUser.setPassport(user.getPassport());
+        mapper.updateUserFromAddOrUpdateUserDto(user, foundUser);
         return mapper.userToUserDto(foundUser);
     }
 
     @Transactional
-    public void deleteUser(Long userId) {
+    public void markAsDeletedUser(Long userId) {
         User user = getUserEntity(userId);
         user.setDeleted(true);
+    }
+
+    @Transactional
+    public void deleteUser(Long userId) {
+        User foundUser = getUserEntity(userId);
+        foundUser.getTickets()
+                 .forEach(it -> {
+                     it.setUser(null);
+                     foundUser.setTickets(null);
+                 });
+        userRepository.delete(foundUser);
+
     }
 
     private User getUserEntity(Long userId) {

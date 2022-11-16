@@ -36,6 +36,11 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
+    public void markAsDeletedUser(@PathVariable Long userId) {
+        userService.markAsDeletedUser(userId);
+    }
+
+    @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
     }
