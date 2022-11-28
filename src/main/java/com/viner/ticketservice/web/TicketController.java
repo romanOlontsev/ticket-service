@@ -7,6 +7,7 @@ import com.viner.ticketservice.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,14 +31,14 @@ public class TicketController {
     @PutMapping("/{planeId}/tickets/{ticketId}")
     public TicketDto updateTicket(@PathVariable Long planeId,
                                   @PathVariable Long ticketId,
-                                  @RequestBody AddOrUpdateTicketDto ticketDto) {
+                                  @Valid @RequestBody AddOrUpdateTicketDto ticketDto) {
         return ticketService.updateTicket(planeId, ticketId, ticketDto);
     }
 
     @PatchMapping("/{planeId}/tickets/{ticketId}/passenger")
     public TicketDto addUserToTicket(@PathVariable Long planeId,
                                      @PathVariable Long ticketId,
-                                     @RequestBody AddOrUpdateUserDto user) {
+                                     @Valid @RequestBody AddOrUpdateUserDto user) {
         return ticketService.addUserToTicket(planeId, ticketId, user);
     }
 

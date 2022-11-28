@@ -6,6 +6,7 @@ import com.viner.ticketservice.service.PlaneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,12 +26,12 @@ public class PlaneController {
     }
 
     @PostMapping
-    public PlaneDto addPlane(@RequestBody AddOrUpdatePlaneDto plane) {
+    public PlaneDto addPlane(@Valid @RequestBody AddOrUpdatePlaneDto plane) {
         return planeService.addPlane(plane);
     }
 
     @PutMapping("/{planeId}")
-    public PlaneDto updatePlane(@PathVariable Long planeId, @RequestBody AddOrUpdatePlaneDto plane) {
+    public PlaneDto updatePlane(@PathVariable Long planeId, @Valid @RequestBody AddOrUpdatePlaneDto plane) {
         return planeService.updatePlane(planeId, plane);
     }
 
