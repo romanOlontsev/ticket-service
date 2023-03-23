@@ -12,50 +12,54 @@
 **planes**
 
  - GET /planes
-	возвращает рейсы от текущей даты и позднее
-	возвращает Pageable response
+
+   - возвращает рейсы от текущей даты и позднее
+
+   - возвращает Pageable response
 	 
  - GET /planes/{planeId}
-	возвращает рейс по id
+    
+   - возвращает рейс по id
 	
  - POST /planes
-	добавляет рейс, при добавлении рейса создаются билеты в нужном кол-ве
+    
+   - добавляет рейс, при добавлении рейса создаются билеты в нужном кол-ве
 
  - PUT /planes/{planeId}
-	обновляет информацию о существующем рейсе
+    - обновляет информацию о существующем рейсе
 	
  - PATCH /planes/{planeId}
-	помечает рейс как удаленный, помечает все билеты на рейс как удаленные
+    - помечает рейс как удаленный, помечает все билеты на рейс как удаленные
 
 **tickets**
 
  - GET /planes/{plainId}/tickets
-	{Query params: Boolean isSold} - возращает все билеты/ только проданные / билеты в продаже
+    - {Query params: Boolean isSold} - возращает все билеты/ только проданные / билеты в продаже
 	
  - GET /plains/{plainId}/tickets/{ticketId}
-	возвращает билет по id
+    - возвращает билет по id
 	
  - PUT /tickets/{ticketId}
-	обновляет информацию о билете
+    - обновляет информацию о билете
 	
  - PATCH /tickets/{ticketId}
-	помечает билет как удаленный
+    - помечает билет как удаленный
 	
 **users**
  - GET /users
-	возвращает всех пользователей
+    - возвращает всех пользователей
 	
  - GET /users/{userId}
-	возвращает пользователя по id
+    - возвращает пользователя по id
 	
  - POST /users
-	добавляет нового пользователя
+    - добавляет нового пользователя
 	
  - PUT /users/{userId}
-	обновляет информацию о пользователе
+    - обновляет информацию о пользователе
  
  - PATCH /users/{userId}
-	помечает пользователя как удаленного
+    - помечает пользователя как удаленного
 	
 Опционально
  - Добавить поиск самолетов, которые в данный момент в воздухе
@@ -75,26 +79,28 @@
 Приложение должно иметь следующую структуру:
 
  - Слой Repository - взаимодействие с базой данных
- 	Попробовать разные инструменты (NativeQuery, JPQL, Jpa repository)
-	Обратить внимание на CriteriaApi и Specification
+
+ Попробовать разные инструменты (NativeQuery, JPQL, Jpa repository)
+ 
+Обратить внимание на CriteriaApi и Specification
  - Слой Service - слой бизнес логики
  - Слой Web - слой rest контроллеров
-	Использовать  [Orika mapper](https://orika-mapper.github.io/orika-docs/)
-	Добавить Swagger
+    - Использовать  [Orika mapper](https://orika-mapper.github.io/orika-docs/)
+    - Добавить Swagger
 
 Структура каталогов будет примерно следующая:
 
 	app:
-		src:
-			main:
-				java:
-					com.example.app:
-									config
-									model
-									repository
-									service
-									web
-			test
+	    src:
+		main:
+		     java:
+		          com.example.app:
+					config
+					model
+					repository
+					service
+					web
+		test
 
 Тесты:
  - написать интеграционные тесты (MockMvc)
